@@ -15,7 +15,7 @@
 - `/mainpage`: Get the mainpage URL
 - `/archive`: Get the specific archive page URL 
 	- Format: `/archive [YEAR]-[MONTH]` e.g. `/archive 2018-12'`
-- `/help`: Get command refernce 
+- `/help`: Get command reference 
 
 ### Button Mode
 - Type in `/start` always can start the usage<br>
