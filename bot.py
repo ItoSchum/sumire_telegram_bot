@@ -39,6 +39,7 @@ start_welcome = ('Здравствуйте!\n\n'
     'СУМИРЭ すみれ')
 
 help_ref = ('Command Refernce:\n\n'
+    '/start - start inline-keyboard-button mode operation'
     '/crawl - crawl the images of the latest article only\n'
     '/crawl_all - crawl the images of the latest three articles\n'
     '/mainpage - get the mainpage URL\n'
@@ -54,7 +55,6 @@ time_args = []
 
 def start(bot, update):
     """Send a message when the command /start is issued."""
-    update.message.reply_text(start_welcome)
     update.message.reply_text(main_menu_message(), reply_markup=main_menu_keyboard())
     
 def main_menu(bot, update):
@@ -238,6 +238,10 @@ def error(bot, update, error):
     logger.warning('Update "%s" caused error "%s"', update, error)
 
 
+def echo(bot, update):
+    """Echo the user message."""
+    update.message.reply_text(start_welcome)
+
 ############################# Main #########################################
 
 def main():
@@ -264,7 +268,7 @@ def main():
     archive_handler = CommandHandler('archive', archive, pass_args=True)
     dp.add_handler(archive_handler)
 
-    # dp.add_handler(CallbackQueryHandler(button))
+    dp.add_handler(MessageHandler(Filters.text, echo))
 
     dp.add_handler(CallbackQueryHandler(button, pattern='/crawl'))
     dp.add_handler(CallbackQueryHandler(button, pattern='/crawl_all'))
