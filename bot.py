@@ -56,7 +56,7 @@ def start(bot, update):
     """Send a message when the command /start is issued."""
     update.message.reply_text(start_welcome)
     update.message.reply_text(main_menu_message(), reply_markup=main_menu_keyboard())
-
+    
 def main_menu(bot, update):
     query = update.callback_query
     bot.edit_message_text(text=main_menu_message(),
@@ -73,12 +73,12 @@ def archive_menu(bot, update):
 
 def archive_submenu(bot, update):
     query = update.callback_query
+    time_args.clear()
+    time_args.append(query.data)
     bot.edit_message_text(text=archive_submenu_message(),
                           chat_id=query.message.chat_id,
                           message_id=query.message.message_id,
                           reply_markup=archive_submenu_keyboard())
-    time_args = []
-    time_args.append(query.data)
 
 def month_button(bot, update):
     query = update.callback_query
