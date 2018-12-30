@@ -43,7 +43,7 @@ help_ref = ('Command Refernce:\n\n'
     '/crawl - crawl the images of the latest article only\n'
     '/crawl_all - crawl the images of the latest three articles\n'
     '/mainpage - get the mainpage URL\n'
-    '/archive - get the specific archive page URL. FORMAT: /archive [YEAR]-[MONTH] e.g. /archive 2018-12')
+    '/archive - get the specific archive page URL FORMAT: /archive [YEAR]-[MONTH] e.g. /archive 2018-12')
 
 blog_url = 'https://lineblog.me/uesaka_sumire/'
 time_args = []
