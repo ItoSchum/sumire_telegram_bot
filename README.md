@@ -8,6 +8,7 @@
 - Telegram
 
 ## Usage
+- Start a conversation with [@uesaka\_sumire\_bot](https://t.me/uesaka_sumire_bot)
 
 ### Command Mode:
 - `/crawl`: Crawl the images of the latest article only
