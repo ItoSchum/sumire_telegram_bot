@@ -10,10 +10,12 @@
 ## Usage
 
 ### Command Mode:
-- `/crawl`: crawl the images of the latest article only
-- `/crawl_all`: crawl the images of the latest three articles
-- `/mainpage`: get the mainpage URL
-- `/archive`: get the specific archive page URL. FORMAT: /archive [YEAR]-[MONTH] e.g. /archive 2018-12')
+- `/crawl`: Crawl the images of the latest article only
+- `/crawl_all`: Crawl the images of the latest three articles
+- `/mainpage`: Get the mainpage URL
+- `/archive`: Get the specific archive page URL 
+	- Format: `/archive [YEAR]-[MONTH]` e.g. `/archive 2018-12'`
+- `/help`: Get command refernce 
 
 ### Button Mode
 - Type in `/start` always can start the usage<br>
