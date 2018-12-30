@@ -77,6 +77,7 @@ def archive_submenu(bot, update):
                           chat_id=query.message.chat_id,
                           message_id=query.message.message_id,
                           reply_markup=archive_submenu_keyboard())
+    time_args = []
     time_args.append(query.data)
 
 def month_button(bot, update):
