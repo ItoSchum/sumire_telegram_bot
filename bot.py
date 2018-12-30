@@ -39,7 +39,7 @@ start_welcome = ('Здравствуйте!\n\n'
     'СУМИРЭ すみれ')
 
 help_ref = ('Command Refernce:\n\n'
-    '/start - start inline-keyboard-button mode operation'
+    '/start - start inline-keyboard-button mode operation\n'
     '/crawl - crawl the images of the latest article only\n'
     '/crawl_all - crawl the images of the latest three articles\n'
     '/mainpage - get the mainpage URL\n'
