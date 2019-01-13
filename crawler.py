@@ -105,6 +105,7 @@ def specific_parse_and_download(target_url, article_position = 0):
 # 	whole_parse_and_download(raw_url)
 
 # elif crawler_mode == '2':
+# 	whole_parse_and_download(raw_url)
 # 	target_urls = find_target_urls(raw_url)
 # 	for target_url in target_urls:
 # 		whole_parse_and_download(target_url.get('href'))
