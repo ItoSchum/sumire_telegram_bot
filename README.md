@@ -18,7 +18,7 @@
 - `/archive`: Get the specific archive page URL 
 	- Format: `/archive [YEAR]-[MONTH]` e.g. `/archive 2018-12'`
 - `/help`: Get command reference 
-
+- `/update_check`: Check out whether the blog updated today
 ### Inline-Keyboard-Button Mode
 - Type in `/start` always can start the usage<br>
 - Then, same as the command mode.

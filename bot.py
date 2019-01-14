@@ -23,6 +23,8 @@ from telegram import InlineQueryResultArticle, ParseMode, InputTextMessageConten
 from telegram.ext import Updater, InlineQueryHandler, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 import logging
 
+import time
+import datetime
 import crawler
 
 
@@ -43,19 +45,40 @@ help_ref = ('Command Refernce:\n\n'
     '/crawl - crawl the images of the latest article only\n'
     '/crawl_all - crawl the images of the latest three articles\n'
     '/mainpage - get the mainpage URL\n'
-    '/archive - get the specific archive page URL FORMAT: /archive [YEAR]-[MONTH] e.g. /archive 2018-12')
-
+    '/archive - get the specific archive page URL FORMAT: /archive [YEAR]-[MONTH] e.g. /archive 2018-12\n'
+    '/update_check - check out whether the blog updated today')
 blog_url = 'https://lineblog.me/uesaka_sumire/'
 time_args = []
+
 
 # Define a few command handlers. These usually take the two arguments bot and
 # update. Error handlers also receive the raised TelegramError object in error.
 
 ############################### Bot ############################################
 
+# def push(bot, job):
+    #"""Send the push message."""
+    # if crawler.date_push_compare() == True:
+    #     urls = crawler.specific_parse_and_download(blog_url)
+    #     for url in urls:
+    #         job.context.message.reply_text(url)
+    # else:
+    #     job.context.message.reply_text("No Update Today")
+
+
+# def timer(bot, update, job_queue):
+    # day_frequency = 1
+    # day_time = datetime.time(hour=5, minute=14, second=0)
+    # job = job_queue.run_daily(callback=push, 
+                              # time=day_time, 
+                              # days=day_frequency, 
+                              # context=update)
+
+
 def start(bot, update):
     """Send a message when the command /start is issued."""
     update.message.reply_text(main_menu_message(), reply_markup=main_menu_keyboard())
+
     
 def main_menu(bot, update):
     query = update.callback_query
@@ -116,7 +139,9 @@ def main_menu_keyboard():
                  InlineKeyboardButton("Crawl All", callback_data='/crawl_all')],
 
                 [InlineKeyboardButton("Main Page", url=blog_url),
-                 InlineKeyboardButton("Archive", callback_data='archive')]] 
+                 InlineKeyboardButton("Archive", callback_data='archive')],
+
+                [InlineKeyboardButton("Blog Update Check", callback_data='/update_check')]]
     return InlineKeyboardMarkup(keyboard)
 
 def archive_menu_keyboard():
@@ -242,6 +267,16 @@ def echo(bot, update):
     """Echo the user message."""
     update.message.reply_text(start_welcome)
 
+
+def update_check(bot, update):
+    if crawler.date_push_compare() == True:
+        urls = crawler.specific_parse_and_download(blog_url)
+        for url in urls:
+            update.message.reply_text(url)
+    else:
+        update.message.reply_text("No Update Today")
+
+
 ############################# Main #########################################
 
 def main():
@@ -257,6 +292,7 @@ def main():
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
+    job_queue = updater.job_queue
 
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
@@ -269,7 +305,10 @@ def main():
     dp.add_handler(archive_handler)
 
     dp.add_handler(MessageHandler(Filters.text, echo))
+    # dp.add_handler(MessageHandler(Filters.text, timer, pass_job_queue=True))
+    dp.add_handler(CommandHandler("update_check", update_check))
 
+    dp.add_handler(CallbackQueryHandler(button, pattern='/update_check'))
     dp.add_handler(CallbackQueryHandler(button, pattern='/crawl'))
     dp.add_handler(CallbackQueryHandler(button, pattern='/crawl_all'))
 
